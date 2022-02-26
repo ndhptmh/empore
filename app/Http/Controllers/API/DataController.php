@@ -29,7 +29,7 @@ class DataController extends Controller
         }
         else{
             $data = Member::get();
-            if($data){
+            if(count($data) > 0){
                 return response()->json([
                     'status' => 1,
                     'message' => 'berhasil mendapatkan data member',
@@ -77,7 +77,7 @@ class DataController extends Controller
         }
         else{
             $data = BookLoan::get();
-            if($data){
+            if(count($data) > 0){
                 return response()->json([
                     'status' => 1,
                     'message' => 'berhasil mendapatkan data peminjaman',

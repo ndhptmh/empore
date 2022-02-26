@@ -28,7 +28,7 @@ class BookController extends Controller
         }
         else{
             $book = Book::get();
-            if($book){
+            if(count($book) > 0){
                 return response()->json([
                     'status' => 1,
                     'message' => 'berhasil mendapatkan data buku',
@@ -102,8 +102,9 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($book)
     {
+        $book = Book::whereId($book)->first();
         if($book){
             return response()->json([
                 'status' => 1,
@@ -114,8 +115,8 @@ class BookController extends Controller
         else{
             return response()->json([
                 'status' => 0,
-                'message' => 'data buku tidak ditemukan',
-                'data' => NULL,
+                'message' => 'tidak ada buku dengan id tersebut',
+                'data' => NULL
             ]);
         }
     }
@@ -126,8 +127,9 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit($book)
     {
+        $book = Book::whereId($book)->first();
         if($book){
             return response()->json([
                 'status' => 1,
@@ -138,8 +140,8 @@ class BookController extends Controller
         else{
             return response()->json([
                 'status' => 0,
-                'message' => 'data buku tidak ditemukan',
-                'data' => NULL,
+                'message' => 'tidak ada buku dengan id tersebut',
+                'data' => NULL
             ]);
         }
     }
@@ -151,35 +153,45 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $book)
     {
-        $request->validate([
-            'code' => 'required|unique:books,code,'.$book->id,
-            'title' => 'required',
-            'stock' => 'required',
-            'year' => 'required',
-            'writer' => 'required',
-        ],
-        [
-            'code.required' => 'Kode Buku wajib di isi!',
-            'title.required' => 'Judul Buku wajib di isi!',
-            'stock.required' => 'Stok Buku wajib di isi!',
-            'year.required' => 'Tahun Buku wajib di isi!',
-            'writer.required' => 'Penulis Buku wajib di isi!',
-        ]);
-
-        Book::whereId($book->id)->update([
-            'code' => $request->code,
-            'title' => $request->title,
-            'stock' => $request->stock,
-            'year' => $request->year,
-            'writer' => $request->writer,
-        ]);  
-
-        return response()->json([
-            'status' => 1,
-            'message' => 'berhasil mengedit data Provider',
-        ]);
+        $book = Book::whereId($book)->first();
+        if($book){
+            $request->validate([
+                'code' => 'required|unique:books,code,'.$book->id,
+                'title' => 'required',
+                'stock' => 'required',
+                'year' => 'required',
+                'writer' => 'required',
+            ],
+            [
+                'code.required' => 'Kode Buku wajib di isi!',
+                'title.required' => 'Judul Buku wajib di isi!',
+                'stock.required' => 'Stok Buku wajib di isi!',
+                'year.required' => 'Tahun Buku wajib di isi!',
+                'writer.required' => 'Penulis Buku wajib di isi!',
+            ]);
+    
+            Book::whereId($book->id)->update([
+                'code' => $request->code,
+                'title' => $request->title,
+                'stock' => $request->stock,
+                'year' => $request->year,
+                'writer' => $request->writer,
+            ]);  
+    
+            return response()->json([
+                'status' => 1,
+                'message' => 'berhasil mengedit data buku',
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 0,
+                'message' => 'tidak ada buku dengan id tersebut',
+                'data' => NULL
+            ]);
+        } 
     }
 
     /**
@@ -188,22 +200,23 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($book)
     {
+        $book = Book::whereId($book)->first();
         if($book){
             Book::destroy($book->id);
             return response()->json([
                 'status' => 1,
                 'message' => 'berhasil menghapus data buku',
+                'data' => $book
             ]);
         }
         else{
             return response()->json([
                 'status' => 0,
-                'message' => 'data buku tidak ditemukan',
-                'data' => NULL,
+                'message' => 'tidak ada buku dengan id tersebut',
+                'data' => NULL
             ]);
         }
-        
     }
 }
