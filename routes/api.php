@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('/book', BookController::Class);
 Route::get('/member', [DataController::class, 'member']);
 Route::get('/bookloan', [DataController::class, 'bookloan']);
+Route::get('/bookByCode/{book}', [BookController::class, 'showByCode']);
+Route::put('/bookByCode/{book}', [BookController::class, 'updateByCode']);
+Route::delete('/bookByCode/{book}', [BookController::class, 'destroyByCode']);

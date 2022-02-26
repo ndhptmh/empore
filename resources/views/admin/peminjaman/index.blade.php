@@ -91,7 +91,7 @@
                             }
                         },
                         error: function(err){
-                            swal({ title: "Gagal!", text: "Terjadi kesalahan saat menerima desa !", icon: "error" })
+                            swal({ title: "Gagal!", text: "Terjadi kesalahan saat mengkonfirmasi peminjaman !", icon: "error" })
                         }
                     })
                 }
@@ -125,7 +125,7 @@
                             }
                         },
                         error: function(err){
-                            swal({ title: "Gagal!", text: "Terjadi kesalahan saat menerima desa !", icon: "error" })
+                            swal({ title: "Gagal!", text: "Terjadi kesalahan saat menolak peminjaman !", icon: "error" })
                         }
                     })
                 }
@@ -159,7 +159,7 @@
                             }
                         },
                         error: function(err){
-                            swal({ title: "Gagal!", text: "Terjadi kesalahan saat menerima desa !", icon: "error" })
+                            swal({ title: "Gagal!", text: "Terjadi kesalahan saat mengkonfirmasi pengembalian buku!", icon: "error" })
                         }
                     })
                 }

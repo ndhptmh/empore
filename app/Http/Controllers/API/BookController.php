@@ -219,4 +219,84 @@ class BookController extends Controller
             ]);
         }
     }
+
+    public function showByCode($book)
+    {
+        $book = Book::whereCode($book)->first();
+        if($book){
+            return response()->json([
+                'status' => 1,
+                'message' => 'berhasil mendapatkan detail data buku',
+                'data' => $book
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 0,
+                'message' => 'tidak ada buku dengan code tersebut',
+                'data' => NULL
+            ]);
+        }
+    }
+
+    public function updateByCode(Request $request, $book)
+    {
+        $book = Book::whereCode($book)->first();
+        if($book){
+            $request->validate([
+                'code' => 'required|unique:books,code,'.$book->id,
+                'title' => 'required',
+                'stock' => 'required',
+                'year' => 'required',
+                'writer' => 'required',
+            ],
+            [
+                'code.required' => 'Kode Buku wajib di isi!',
+                'title.required' => 'Judul Buku wajib di isi!',
+                'stock.required' => 'Stok Buku wajib di isi!',
+                'year.required' => 'Tahun Buku wajib di isi!',
+                'writer.required' => 'Penulis Buku wajib di isi!',
+            ]);
+    
+            Book::whereId($book->id)->update([
+                'code' => $request->code,
+                'title' => $request->title,
+                'stock' => $request->stock,
+                'year' => $request->year,
+                'writer' => $request->writer,
+            ]);  
+    
+            return response()->json([
+                'status' => 1,
+                'message' => 'berhasil mengedit data buku',
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 0,
+                'message' => 'tidak ada buku dengan code tersebut',
+                'data' => NULL
+            ]);
+        } 
+    }
+
+    public function destroyByCode($book)
+    {
+        $book = Book::whereCode($book)->first();
+        if($book){
+            Book::destroy($book->id);
+            return response()->json([
+                'status' => 1,
+                'message' => 'berhasil menghapus data buku',
+                'data' => $book
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 0,
+                'message' => 'tidak ada buku dengan code tersebut',
+                'data' => NULL
+            ]);
+        }
+    }
 }

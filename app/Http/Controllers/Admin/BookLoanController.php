@@ -27,7 +27,12 @@ class BookLoanController extends Controller
             'message' => 'Peminjaman buku ditolak'
         ];
         BookLoan::whereId($id)->update($form_data);
-        return 'berhasil';
+        
+        return response()->json([
+            'status' => 0,
+            'message' => 'Peminjaman buku berhasil ditolak',
+            'data' => NULL
+        ]);
     }
 
     public function accept($id){

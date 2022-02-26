@@ -14,10 +14,10 @@
 4. Jalankan perintah "php artisan serve" Aplikasi siap untuk digunakan.
 5. Untuk mengecek API dapat menggunakan Postman.
 6. Untuk mengecek API list buku dapat menggunakan method GET dan url : http://localhost:8000/api/book
-7. Untuk mengecek API detail buku dapat menggunakan method GET dan url : http://localhost:8000/api/book/{id}
-8. Untuk mengecek API membuat buku baru dapat menggunakan method POST dan url : http://localhost:8000/api/book dengan menambah paramater (code, stock, title,year, writer) 
-9. Untuk mengecek API mengedit buku dapat menggunakan method PUT dan url : http://localhost:8000/api/book/{id} dengan menambah paramater (code, stock, title,year, writer) 
-10. Untuk mengecek API menghapus buku dapat menggunakan method DELETE dan url : http://localhost:8000/api/book/{id}
+7. Untuk mengecek API membuat buku baru dapat menggunakan method POST dan url : http://localhost:8000/api/book dengan menambah paramater (code, stock, title,year, writer)  
+8. Untuk mengecek API detail buku dapat menggunakan method GET dan url : http://localhost:8000/api/book/{id} atau http://localhost:8000/api/bookByCode/{code}
+9. Untuk mengecek API mengedit buku dapat menggunakan method PUT dan url : http://localhost:8000/api/book/{id} dengan menambah paramater (code, stock, title,year, writer) atau http://localhost:8000/api/bookByCode/{code}
+10. Untuk mengecek API menghapus buku dapat menggunakan method DELETE dan url : http://localhost:8000/api/book/{id} atau http://localhost:8000/api/bookByCode/{code}
 11. Untuk mengecek API list member dapat menggunakan method GET dan url : http://localhost:8000/api/member
 12. Untuk mengecek API list peminjaman buku dapat menggunakan method GET dan url : http://localhost:8000/api/bookloan
 13. Untuk melihat contoh API Anda bisa melihat file dokumentasi API.docx pada folder public.
