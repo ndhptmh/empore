@@ -29,11 +29,20 @@ class DataController extends Controller
         }
         else{
             $data = Member::get();
-            return response([
-                'status' => 1,
-                'message' => 'berhasil mendapatkan data',
-                'data' => $data,
-            ]);
+            if($data){
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'berhasil mendapatkan data member',
+                    'data' => $data
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'belum ada data member',
+                    'data' => NULL,
+                ]);
+            }
         }
     }
 
@@ -68,11 +77,20 @@ class DataController extends Controller
         }
         else{
             $data = BookLoan::get();
-            return response([
-                'status' => 1,
-                'message' => 'berhasil mendapatkan data',
-                'data' => $data,
-            ]);
+            if($data){
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'berhasil mendapatkan data peminjaman',
+                    'data' => $data
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'belum ada data peminjaman buku',
+                    'data' => NULL,
+                ]);
+            }
         }
 
     }

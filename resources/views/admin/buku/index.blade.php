@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="col-sm-2">
-                <a href="{{url('buku/create')}}" class="btn btn-sm btn-success">Tambah</a>
+                <a href="{{url('buku/create')}}" class="btn btn-sm btn-success mt-4">Tambah</a>
             </div>
         </div>
         <div class="card-body">

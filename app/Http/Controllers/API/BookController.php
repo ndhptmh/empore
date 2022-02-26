@@ -28,11 +28,20 @@ class BookController extends Controller
         }
         else{
             $book = Book::get();
-            return response([
-                'status' => 1,
-                'message' => 'berhasil mendapatkan data',
-                'data' => $book,
-            ]);
+            if($book){
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'berhasil mendapatkan data buku',
+                    'data' => $book
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'belum ada data buku',
+                    'data' => NULL,
+                ]);
+            }
         }
 
     }
@@ -95,11 +104,20 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return response()->json([
-            'status' => 1,
-            'message' => 'berhasil mendapatkan detail data buku',
-            'data' => $book
-        ]);
+        if($book){
+            return response()->json([
+                'status' => 1,
+                'message' => 'berhasil mendapatkan detail data buku',
+                'data' => $book
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 0,
+                'message' => 'data buku tidak ditemukan',
+                'data' => NULL,
+            ]);
+        }
     }
 
     /**
@@ -110,11 +128,20 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return response()->json([
-            'status' => 1,
-            'message' => 'berhasil mendapatkan detail data buku',
-            'data' => $book
-        ]);
+        if($book){
+            return response()->json([
+                'status' => 1,
+                'message' => 'berhasil mendapatkan detail data buku',
+                'data' => $book
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 0,
+                'message' => 'data buku tidak ditemukan',
+                'data' => NULL,
+            ]);
+        }
     }
 
     /**
@@ -163,10 +190,20 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        Book::destroy($book->id);
-        return response()->json([
-            'status' => 1,
-            'message' => 'berhasil menghapus data buku',
-        ]);
+        if($book){
+            Book::destroy($book->id);
+            return response()->json([
+                'status' => 1,
+                'message' => 'berhasil menghapus data buku',
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 0,
+                'message' => 'data buku tidak ditemukan',
+                'data' => NULL,
+            ]);
+        }
+        
     }
 }

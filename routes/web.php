@@ -37,7 +37,7 @@ Route::get('/', function(){
 Route::middleware('auth:admin')->group(function(){
     Route::get('/dashboard', [AuthController::class, 'dashboard']);
     Route::resource('/member', MemberController::Class);
-    
+    Route::resource('/buku', BukuController::Class);
     Route::get('/peminjaman', [BookLoanController::class, 'index']);
     Route::get('/peminjaman/decline/{id}', [BookLoanController::class, 'decline']);
     Route::get('/peminjaman/accept/{id}', [BookLoanController::class, 'accept']);
